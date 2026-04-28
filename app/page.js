@@ -1,20 +1,16 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
-import Link from "next/link";
-import Slider from "react-slick";
-import "slick-carousel/slick/slick.css";
-import "slick-carousel/slick/slick-theme.css";
 import { Fade } from "react-awesome-reveal";
-// Ensure this path matches your file structure, or remove if not needed
-// import Wave from "../components/Wave.tsx"; 
 
-export default function Home() {
+export default function TelematicsLanding() {
   const [scrollY, setScrollY] = useState(0);
-  const [activeTab, setActiveTab] = useState(0);
+  const [activeSegment, setActiveSegment] = useState(0);
   const [copiedStatus, setCopiedStatus] = useState("");
+  const [isLoaded, setIsLoaded] = useState(false);
 
   useEffect(() => {
+    setIsLoaded(true);
     const handleScroll = () => setScrollY(window.scrollY);
     window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
@@ -30,252 +26,265 @@ export default function Home() {
     setTimeout(() => setCopiedStatus(""), 2000);
   };
 
-  const sliderSettings = {
-    dots: false,
-    infinite: true,
-    speed: 800,
-    slidesToShow: 1,
-    slidesToScroll: 1,
-    autoplay: true,
-    autoplaySpeed: 6000,
-    arrows: false, // Hidden for a cleaner minimal aesthetic
-  };
-
-  const whyUsTabs = [
+  const vehicleSegments = [
     {
-      title: "Precision Engineering",
-      desc: "Our devices deliver industry-leading accuracy in detecting even the smallest trace of disease markers, ensuring early and reliable diagnosis with zero compromise.",
-      img: "https://images.unsplash.com/photo-1579154204601-01588f351e67?ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&q=80",
+      id: "SEG-01",
+      title: "Passenger Cars",
+      target: "For OEMs, dealerships, service networks, and leasing companies.",
+      benefits: ["Live location & trip intelligence", "Vehicle health monitoring", "Remote diagnostics", "Driving behavior insights", "Theft alert & immobilization"],
+      img: "https://images.unsplash.com/photo-1494976388531-d1058494cdd8?auto=format&fit=crop&q=80&w=1000",
     },
     {
-      title: "System Scalability",
-      desc: "From major healthcare institutions to rural clinics, our architecture is built to adapt everywhere without compromising on performance or data integrity.",
-      img: "https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&q=80",
+      id: "SEG-02",
+      title: "Electric Vehicles",
+      target: "For EV OEMs, charging networks, fleet operators, and energy platforms.",
+      benefits: ["Battery state-of-charge (SOC) monitoring", "Battery state-of-health (SOH) insights", "Charging session tracking", "Thermal & energy behavior", "Remote fault detection"],
+      img: "https://images.unsplash.com/photo-1593941707882-a5bba14938c7?auto=format&fit=crop&q=80&w=1000",
     },
     {
-      title: "Global Infrastructure",
-      desc: "Committed to making cutting-edge diagnostic technology accessible worldwide, systematically breaking down geographical barriers in global healthcare.",
-      img: "https://images.unsplash.com/photo-1530497610245-94d3c16cda28?ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&q=80",
+      id: "SEG-03",
+      title: "Commercial Vehicles",
+      target: "For logistics companies, last-mile delivery fleets, and rental operators.",
+      benefits: ["Fleet tracking & route optimization", "Fuel & usage analytics", "Engine diagnostics", "Driver scoring & idle monitoring", "Geo-fencing alerts"],
+      img: "https://images.unsplash.com/photo-1519003722824-194d4455a60c?auto=format&fit=crop&q=80&w=1000",
+    },
+    {
+      id: "SEG-04",
+      title: "Heavy Vehicles",
+      target: "For transport operators, construction fleets, mining, and long-haul logistics.",
+      benefits: ["CAN/J1939-ready architecture", "Uptime & maintenance intelligence", "Driver safety monitoring", "Route & load behavior analytics", "High-durability deployment"],
+      img: "https://images.unsplash.com/photo-1586191552066-d52cd1d4ca81?auto=format&fit=crop&q=80&w=1000",
     },
   ];
 
   return (
-    <div className="bg-[#fcfcfc] overflow-hidden font-sans text-slate-900 selection:bg-slate-900 selection:text-white">
+    <div className="bg-[#fafafa] overflow-hidden font-sans text-slate-900 selection:bg-slate-900 selection:text-white relative">
       
-      {/* Hero Section */}
-      <section id="home" className="relative w-full h-screen overflow-hidden">
+      {/* Global Drafting Grid Background */}
+      <div className="fixed inset-0 pointer-events-none z-0 opacity-[0.03]" 
+           style={{ backgroundImage: 'linear-gradient(#000 1px, transparent 1px), linear-gradient(90deg, #000 1px, transparent 1px)', backgroundSize: '40px 40px' }}>
+      </div>
+
+      {/* Minimalist Fixed Header */}
+      <header className={`fixed top-0 w-full z-50 transition-all duration-500 ${scrollY > 50 ? 'bg-white/80 backdrop-blur-md border-b border-slate-200 py-4' : 'bg-transparent py-6'}`}>
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex justify-between items-center">
+          <div className="text-sm font-extrabold tracking-[0.2em] uppercase text-slate-900 mix-blend-difference flex items-center gap-2">
+            GLOPORT <span className="font-light text-slate-400">×</span> CARTELSOL <span className="font-light text-slate-400">GERMANY</span>
+          </div>
+          <div className="hidden lg:flex gap-6 text-[10px] font-bold tracking-widest text-slate-500 uppercase">
+            <a href="#solution" className="hover:text-slate-900 transition-colors">Solution</a>
+            <a href="#segments" className="hover:text-slate-900 transition-colors">Segments</a>
+            <a href="#technology" className="hover:text-slate-900 transition-colors">Technology</a>
+            <a href="#make-in-india" className="hover:text-slate-900 transition-colors">Make in India</a>
+          </div>
+        </div>
+      </header>
+
+      {/* 2. Hero Section */}
+      <section className="relative w-full min-h-screen overflow-hidden bg-slate-950 flex items-center">
         <div
-          className="absolute inset-0 w-full h-full flex items-center justify-center bg-slate-950 will-change-transform"
-          style={{ transform: `translateY(${scrollY * 0.4}px)` }}
+          className="absolute inset-0 w-full h-full flex items-center justify-center will-change-transform scale-105"
+          style={{ transform: `translateY(${scrollY * 0.3}px)` }}
         >
           <video
-            className="w-full h-full object-cover opacity-40 transition-opacity duration-1000 mix-blend-luminosity"
+            className="w-full h-full object-cover opacity-30 mix-blend-luminosity"
             src="/videos/hero-bg.mp4"
             autoPlay
             loop
             muted
             playsInline
           />
-          <div className="absolute inset-0 bg-gradient-to-b from-transparent via-slate-950/60 to-slate-950"></div>
+          <div className="absolute inset-0 bg-gradient-to-b from-slate-950/60 via-transparent to-slate-950"></div>
+          <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNCIgaGVpZ2h0PSI0IiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPjxyZWN0IHdpZHRoPSI0IiBoZWlnaHQ9IjQiIGZpbGw9IiNmZmYiIGZpbGwtb3BhY2l0eT0iMC4wNSIvPjwvc3ZnPg==')] opacity-40"></div>
         </div>
 
-        <div className="relative z-10 flex flex-col items-start justify-center h-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-24 pb-12">
           <Fade direction="up" duration={1200} triggerOnce>
-            <div>
-              <div className="inline-block border-b border-white/20 pb-2 mb-6">
-                <span className="text-xs uppercase tracking-[0.3em] text-white/70 font-semibold">
-                  Gloport Photonix
+            <div className={`transition-all duration-1000 ${isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
+              <div className="inline-block border border-white/20 px-4 py-2 mb-8 backdrop-blur-sm">
+                <span className="text-[10px] uppercase tracking-[0.4em] text-white/70 font-bold">
+                  Gloport × CarTelSol Germany
                 </span>
               </div>
+              
               <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-extrabold tracking-tighter text-white max-w-5xl leading-[0.95]">
-                Revolutionizing <br /> Healthcare through <br />
-                <span className="text-slate-400">Photonics.</span>
+                Futuristic Telematics for <br />
+                <span className="text-transparent bg-clip-text bg-gradient-to-r from-slate-300 to-slate-600">
+                  Connected Mobility.
+                </span>
               </h1>
 
-              <p className="mt-8 text-lg sm:text-xl text-slate-300 max-w-xl font-light leading-relaxed">
-                Engineering cutting-edge life science solutions to empower early disease detection and drive enterprise-grade diagnostic innovation.
+              <p className="mt-8 text-lg sm:text-xl text-slate-400 max-w-2xl font-light leading-relaxed border-l border-slate-700 pl-6">
+                Gloport, in collaboration with CarTelSol Germany, is developing an advanced automotive telematics unit for the Indian market — designed for cars, commercial fleets, electric vehicles, buses, trucks, and heavy-duty mobility platforms.
               </p>
 
-              <div className="mt-12 flex gap-6 items-center">
-                <a
-                  href="https://forms.gle/C9hvwdtz2QcqPTVL7"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="group relative inline-flex items-center justify-center px-10 py-5 text-xs font-bold uppercase tracking-[0.2em] text-slate-900 bg-white overflow-hidden transition-all duration-500 hover:bg-slate-100"
-                >
-                  <span className="relative z-10">Initiate Contact</span>
+              <div className="mt-12 flex flex-col sm:flex-row gap-6">
+                <a href="#solution" className="group relative inline-flex items-center justify-center px-10 py-5 text-xs font-bold uppercase tracking-[0.2em] text-slate-900 bg-white overflow-hidden transition-all hover:bg-slate-100">
+                  <span>Explore the Solution</span>
+                </a>
+                <a href="#contact-us" className="group relative inline-flex items-center justify-center px-10 py-5 text-xs font-bold uppercase tracking-[0.2em] text-white border border-white/20 backdrop-blur-sm hover:bg-white/10 transition-all">
+                  <span>Join Pilot Program</span>
                 </a>
               </div>
             </div>
           </Fade>
         </div>
 
-        {/* Typographic Scroll Indicator */}
-        <div className="absolute bottom-12 right-12 z-20 hidden md:flex items-center gap-4">
-          <span className="text-[10px] font-bold uppercase tracking-widest text-white/50">Scroll</span>
-          <div className="w-16 h-[1px] bg-white/20 relative overflow-hidden">
-            <div className="absolute top-0 left-0 w-1/3 h-full bg-white animate-[slideRight_2s_ease-in-out_infinite]" />
+        {/* Hero Highlight Strip */}
+        <div className="absolute bottom-0 w-full border-t border-white/10 bg-slate-950/50 backdrop-blur-md py-4 z-20 overflow-hidden">
+           <div className="flex whitespace-nowrap animate-[slideLeft_30s_linear_infinite] opacity-50">
+             {[...Array(3)].map((_, i) => (
+                <div key={i} className="flex gap-12 text-[10px] font-bold tracking-[0.3em] uppercase text-white px-6">
+                  <span>Connected Vehicles</span><span>•</span>
+                  <span>EV Intelligence</span><span>•</span>
+                  <span>Fleet Visibility</span><span>•</span>
+                  <span>Diagnostics</span><span>•</span>
+                  <span>Secure Data</span><span>•</span>
+                  <span>Make in India</span><span>•</span>
+                </div>
+             ))}
+           </div>
+        </div>
+      </section>
+
+      {/* 3 & 4. Partnership & Problem Section - Asymmetric Sticky */}
+      <section id="solution" className="relative z-20 bg-[#fafafa]">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-32 border-b border-slate-200">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-16">
+            
+            {/* Sticky Header */}
+            <div className="lg:col-span-5 relative">
+              <div className="lg:sticky lg:top-32">
+                <Fade direction="up" duration={1000} triggerOnce>
+                  <div>
+                    <h2 className="text-[10px] font-bold uppercase tracking-[0.3em] text-slate-400 mb-6 flex items-center gap-3">
+                      <span className="w-4 h-[1px] bg-slate-400"></span> 01 // The Architecture
+                    </h2>
+                    <h3 className="text-4xl sm:text-5xl font-extrabold tracking-tighter text-slate-900 leading-[1]">
+                      German Automotive Expertise. <br />
+                      <span className="text-slate-400">Indian Mobility Scale.</span>
+                    </h3>
+                    <p className="mt-8 text-sm font-bold tracking-[0.1em] text-slate-900 uppercase border-l-2 border-slate-900 pl-4">
+                      Built for India. Engineered with German precision. Designed for the future of mobility.
+                    </p>
+                  </div>
+                </Fade>
+              </div>
+            </div>
+
+            {/* Scrolling Content */}
+            <div className="lg:col-span-7">
+              <Fade direction="up" duration={1000} delay={200} triggerOnce>
+                <div className="space-y-16">
+                  <div>
+                    <p className="text-xl text-slate-600 font-light leading-relaxed mb-6">
+                      Gloport has collaborated with <strong className="font-bold text-slate-900">CarTelSol Germany</strong> to develop a futuristic telematics control unit tailored for the Indian automotive ecosystem.
+                    </p>
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-8 border-y border-slate-200 py-8">
+                      <div>
+                        <h4 className="text-xs font-bold tracking-widest text-slate-900 uppercase mb-3">CarTelSol Germany</h4>
+                        <p className="text-sm text-slate-500 font-light">Strength in automotive-grade telematics, embedded systems, vehicle connectivity, Linux-based systems, PCB integration, and EV/HV system development.</p>
+                      </div>
+                      <div>
+                        <h4 className="text-xs font-bold tracking-widest text-slate-900 uppercase mb-3">Gloport</h4>
+                        <p className="text-sm text-slate-500 font-light">Indian engineering, AI, electronics, deployment, and Make in India commercialization capability for advanced technology products.</p>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div>
+                    <h3 className="text-3xl font-bold tracking-tight text-slate-900 mb-6">India Needs More Than GPS Tracking</h3>
+                    <p className="text-lg text-slate-600 font-light leading-relaxed mb-8">
+                      India’s mobility market is rapidly transforming. Vehicles are becoming smarter, fleets are becoming larger, EV adoption is rising, and customers expect real-time digital control. Many existing vehicle tracking systems focus only on location. The next generation of mobility requires deeper vehicle intelligence.
+                    </p>
+                    <ul className="space-y-4 text-sm text-slate-600 font-light">
+                      <li className="flex gap-4"><span className="text-slate-900 font-bold">—</span> <strong>Limited diagnostics:</strong> Operators discover issues only after breakdowns.</li>
+                      <li className="flex gap-4"><span className="text-slate-900 font-bold">—</span> <strong>Fragmented visibility:</strong> Mixed fleets of cars, trucks, and EVs are difficult to manage.</li>
+                      <li className="flex gap-4"><span className="text-slate-900 font-bold">—</span> <strong>EV data complexity:</strong> Battery, charging, and thermal data require specialized monitoring.</li>
+                      <li className="flex gap-4"><span className="text-slate-900 font-bold">—</span> <strong>Connectivity gaps:</strong> Indian roads require rugged, adaptive systems.</li>
+                      <li className="flex gap-4"><span className="text-slate-900 font-bold">—</span> <strong>Local cost pressure:</strong> Need for advanced tech that can be localized and scaled affordably.</li>
+                    </ul>
+                    <p className="mt-8 text-xl font-bold tracking-tight text-slate-900">
+                      The future of telematics is not just tracking. It is vehicle intelligence.
+                    </p>
+                  </div>
+                </div>
+              </Fade>
+            </div>
           </div>
         </div>
       </section>
 
-      {/* About Section - Fixed Layout Nesting */}
-      <section id="about" className="py-32 bg-white relative">
+      {/* 5. Solution Overview & 14. Architecture Flow */}
+      <section className="py-32 bg-slate-950 text-white relative z-20">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+          <Fade direction="up" duration={1000} triggerOnce>
+            <h2 className="text-[10px] font-bold uppercase tracking-[0.3em] text-slate-500 mb-6">02 // The Solution</h2>
+            <h3 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tighter mb-8 max-w-4xl mx-auto">
+              The Next-Generation Intelligent Telematics Unit
+            </h3>
+            <p className="text-xl text-slate-400 font-light max-w-3xl mx-auto mb-16">
+              A future-ready vehicle connectivity platform designed to act as the intelligent gateway between the vehicle and the cloud. One intelligent unit. Multiple vehicle types. Real-time visibility.
+            </p>
+          </Fade>
+
+          {/* Architecture Flow Visual (Bento Flow) */}
+          <Fade direction="up" duration={1000} delay={200} triggerOnce>
+            <div className="grid grid-cols-1 md:grid-cols-4 gap-2 text-left mb-16">
+              <div className="bg-slate-900 p-8 border border-slate-800">
+                <span className="block text-[10px] font-bold tracking-widest text-slate-500 mb-4">01. SOURCE</span>
+                <h4 className="text-lg font-bold mb-2">Vehicle Data</h4>
+                <p className="text-sm text-slate-400 font-light">CAN / OBD / Sensors / Engine / Battery</p>
+              </div>
+              <div className="bg-slate-800 p-8 border border-slate-700 transform md:-translate-y-4 relative">
+                <span className="block text-[10px] font-bold tracking-widest text-slate-400 mb-4 text-white">02. HARDWARE</span>
+                <h4 className="text-lg font-bold mb-2 text-white">Telematics Unit</h4>
+                <p className="text-sm text-slate-300 font-light">Edge processing & secure cellular transmission.</p>
+              </div>
+              <div className="bg-slate-900 p-8 border border-slate-800">
+                <span className="block text-[10px] font-bold tracking-widest text-slate-500 mb-4">03. INFRASTRUCTURE</span>
+                <h4 className="text-lg font-bold mb-2">Secure Cloud</h4>
+                <p className="text-sm text-slate-400 font-light">Data architecture, OTA, and API gateway.</p>
+              </div>
+              <div className="bg-slate-900 p-8 border border-slate-800">
+                <span className="block text-[10px] font-bold tracking-widest text-slate-500 mb-4">04. INTERFACE</span>
+                <h4 className="text-lg font-bold mb-2">Dashboards & Apps</h4>
+                <p className="text-sm text-slate-400 font-light">Fleet intelligence, diagnostics & OEM API.</p>
+              </div>
+            </div>
+          </Fade>
+        </div>
+      </section>
+
+      {/* 6. Vehicle Segments - Interactive Tabs */}
+      <section id="segments" className="py-32 bg-white relative z-20 border-b border-slate-200">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 items-start">
             
-            {/* Grid class on outer div */}
-            <div className="lg:col-span-5">
-              <Fade direction="left" duration={1000} triggerOnce>
+            <div className="lg:col-span-5 lg:sticky lg:top-32">
+              <Fade direction="up" duration={1000} triggerOnce>
                 <div>
-                  <h2 className="text-xs font-bold uppercase tracking-[0.2em] text-slate-400 mb-6">
-                    01 // The Architecture
+                  <h2 className="text-[10px] font-bold uppercase tracking-[0.3em] text-slate-400 mb-6 flex items-center gap-3">
+                    <span className="w-4 h-[1px] bg-slate-400"></span> 03 // Deployment
                   </h2>
-                  <h3 className="text-4xl sm:text-5xl font-extrabold tracking-tight text-slate-900 leading-tight mb-8">
-                    Pioneering the Future of Diagnostics
-                  </h3>
-                </div>
-              </Fade>
-            </div>
-
-            {/* Grid class on outer div */}
-            <div className="lg:col-span-7">
-              <Fade direction="right" duration={1000} delay={200} triggerOnce>
-                <div>
-                  <p className="text-xl text-slate-600 font-light leading-relaxed mb-8">
-                    Gloport Photonix is a deep-tech enterprise developing advanced life science solutions using photonics. Our mandate is to transform the global healthcare framework by enabling early-stage disease detection at a systemic level, particularly in oncology.
-                  </p>
-                  <p className="text-lg text-slate-500 font-light leading-relaxed mb-12">
-                    Our proprietary technologies are engineered to be non-invasive, highly accurate, and scalable, ensuring alignment with the rigorous demands of modern medical professionals and institutions globally.
-                  </p>
-                  <div className="w-full aspect-[21/9] bg-slate-100 relative overflow-hidden">
-                    <img
-                      src="https://i.postimg.cc/6p34wgKq/3.jpg"
-                      alt="Gloport Photonix Lab"
-                      className="w-full h-full object-cover mix-blend-multiply opacity-90 filter grayscale hover:grayscale-0 transition-all duration-1000"
-                    />
-                  </div>
-                </div>
-              </Fade>
-            </div>
-
-          </div>
-        </div>
-      </section>
-
-      {/* Solutions - Fixed Bento Grid Nesting */}
-      <section id="services" className="py-32 bg-slate-50 border-y border-slate-200">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <Fade direction="up" duration={1000} triggerOnce>
-            <div className="mb-16 flex flex-col md:flex-row md:items-end justify-between gap-8">
-              <div>
-                <h2 className="text-xs font-bold uppercase tracking-[0.2em] text-slate-400 mb-4">
-                  02 // Systems & Solutions
-                </h2>
-                <h3 className="text-4xl sm:text-5xl font-extrabold tracking-tight text-slate-900">
-                  Diagnostic Infrastructure
-                </h3>
-              </div>
-              <p className="text-slate-500 max-w-md font-light text-lg">
-                Leveraging photoacoustic technology in exhaled breath with unparalleled enterprise-grade sensitivity.
-              </p>
-            </div>
-          </Fade>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-1 md:gap-4 auto-rows-[300px]">
-            
-            {/* Box 1 */}
-            <div className="md:col-span-2">
-              <Fade direction="up" duration={1000} delay={100} triggerOnce className="h-full">
-                <div className="h-full bg-white p-10 border border-slate-200 flex flex-col justify-between group hover:bg-slate-900 transition-colors duration-500">
-                  <span className="text-xs font-bold tracking-widest text-slate-400 group-hover:text-slate-500">SYS-01</span>
-                  <div>
-                    <h4 className="text-3xl font-bold text-slate-900 mb-4 group-hover:text-white transition-colors duration-500">
-                      Non-Invasive Protocol
-                    </h4>
-                    <p className="text-slate-500 font-light text-lg max-w-md group-hover:text-slate-400 transition-colors duration-500">
-                      High-fidelity results extracted without the requirement for invasive or surgical procedures, optimizing patient throughput.
-                    </p>
-                  </div>
-                </div>
-              </Fade>
-            </div>
-
-            {/* Box 2 */}
-            <div>
-              <Fade direction="up" duration={1000} delay={200} triggerOnce className="h-full">
-                <div className="h-full bg-slate-900 p-10 border border-slate-900 flex flex-col justify-between group hover:bg-white transition-colors duration-500">
-                  <span className="text-xs font-bold tracking-widest text-slate-500 group-hover:text-slate-400">SYS-02</span>
-                  <div>
-                    <h4 className="text-2xl font-bold text-white mb-4 group-hover:text-slate-900 transition-colors duration-500">
-                      Real-Time Analytics
-                    </h4>
-                    <p className="text-slate-400 font-light group-hover:text-slate-500 transition-colors duration-500">
-                      Multi-wavelength laser arrays generate instantaneous, actionable intelligence for clinical decision-making.
-                    </p>
-                  </div>
-                </div>
-              </Fade>
-            </div>
-
-            {/* Box 3 */}
-            <div className="md:col-span-3">
-              <Fade direction="up" duration={1000} delay={300} triggerOnce className="h-full">
-                <div className="h-full bg-white p-10 border border-slate-200 flex flex-col md:flex-row justify-between md:items-end gap-8 group hover:border-slate-400 transition-colors duration-500">
-                  <div>
-                    <span className="block text-xs font-bold tracking-widest text-slate-400 mb-8">SYS-03</span>
-                    <h4 className="text-3xl font-bold text-slate-900 mb-4">
-                      Scalable Deployment Matrix
-                    </h4>
-                    <p className="text-slate-500 font-light text-lg max-w-2xl">
-                      Engineered to integrate seamlessly within sprawling hospital networks and remote facilities alike, ensuring standardized diagnostic capability regardless of location.
-                    </p>
-                  </div>
-                  <div className="text-xs font-bold tracking-widest text-slate-300 uppercase">
-                    [ Architecture Designed for Scale ]
-                  </div>
-                </div>
-              </Fade>
-            </div>
-
-          </div>
-        </div>
-      </section>
-
-      {/* Interactive Tabs: Strategy - Fixed Layout Nesting */}
-      <section id="why-us" className="py-32 bg-slate-950 text-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 items-center">
-            
-            <div className="lg:col-span-5">
-              <Fade direction="left" duration={1000} triggerOnce>
-                <div>
-                  <h2 className="text-xs font-bold uppercase tracking-[0.2em] text-slate-500 mb-6">
-                    03 // Competitive Advantage
-                  </h2>
-                  <h3 className="text-4xl sm:text-5xl font-extrabold tracking-tight mb-12">
-                    Strategic Capabilities
+                  <h3 className="text-4xl sm:text-5xl font-extrabold tracking-tighter mb-12 text-slate-900 leading-[1]">
+                    Designed for India’s Complete Ecosystem.
                   </h3>
 
-                  <div className="flex flex-col border-t border-slate-800">
-                    {whyUsTabs.map((tab, idx) => (
+                  <div className="flex flex-col border-t border-slate-200">
+                    {vehicleSegments.map((seg, idx) => (
                       <button
                         key={idx}
-                        onClick={() => setActiveTab(idx)}
-                        className="text-left py-6 border-b border-slate-800 focus:outline-none group"
+                        onClick={() => setActiveSegment(idx)}
+                        className="text-left py-6 border-b border-slate-200 focus:outline-none group relative overflow-hidden"
                       >
-                        <div className="flex items-center justify-between">
-                          <h3 className={`text-xl font-bold tracking-tight transition-colors ${activeTab === idx ? "text-white" : "text-slate-500 group-hover:text-slate-300"}`}>
-                            {tab.title}
+                        <div className="relative z-10 flex items-center justify-between pr-4">
+                          <h3 className={`text-xl font-bold tracking-tight transition-colors ${activeSegment === idx ? "text-slate-900" : "text-slate-400 group-hover:text-slate-600"}`}>
+                            {seg.title}
                           </h3>
-                          <span className={`text-xs font-mono transition-colors ${activeTab === idx ? "text-white" : "text-slate-700"}`}>
-                            {activeTab === idx ? "[-]" : "[+]"}
+                          <span className={`text-[10px] font-mono tracking-widest transition-colors ${activeSegment === idx ? "text-slate-900" : "text-slate-300"}`}>
+                            [{seg.id}]
                           </span>
-                        </div>
-                        <div className={`overflow-hidden transition-all duration-500 ease-in-out ${activeTab === idx ? "max-h-40 opacity-100 mt-4" : "max-h-0 opacity-0"}`}>
-                          <p className="text-slate-400 font-light leading-relaxed pr-8">
-                            {tab.desc}
-                          </p>
                         </div>
                       </button>
                     ))}
@@ -285,19 +294,36 @@ export default function Home() {
             </div>
 
             <div className="lg:col-span-7">
-              <Fade direction="right" duration={1000} triggerOnce>
-                <div className="relative h-[600px] bg-slate-900 overflow-hidden w-full">
-                  {whyUsTabs.map((tab, idx) => (
-                    <img
-                      key={idx}
-                      src={tab.img}
-                      alt={tab.title}
-                      className={`absolute inset-0 w-full h-full object-cover filter grayscale transition-all duration-1000 ease-in-out ${
-                        activeTab === idx ? "opacity-60 scale-100 z-10" : "opacity-0 scale-105 z-0"
-                      }`}
-                    />
-                  ))}
-                  <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAiIGhlaWdodD0iNDAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGRlZnM+PHBhdHRlcm4gaWQ9ImdyaWQiIHdpZHRoPSI0MCIgaGVpZ2h0PSI0MCIgcGF0dGVyblVuaXRzPSJ1c2VyU3BhY2VPblVzZSI+PHBhdGggZD0iTSAwIDEwIEwgNDAgMTAgTSAxMCAwIEwgMTAgNDAiIGZpbGw9Im5vbmUiIHN0cm9rZT0icmdiYSgyNTUsMjU1LDI1NSwwLjA1KSIgc3Ryb2tlLXdpZHRoPSIxIi8+PC9wYXR0ZXJuPjwvZGVmcz48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSJ1cmwoI2dyaWQpIi8+PC9zdmc+')] opacity-50 pointer-events-none z-20"></div>
+              <Fade direction="up" duration={1000} triggerOnce>
+                <div className="bg-slate-50 p-8 sm:p-12 border border-slate-200 min-h-[600px] flex flex-col justify-between">
+                  <div>
+                    <span className="inline-block px-3 py-1 bg-slate-900 text-white text-[10px] font-bold tracking-widest uppercase mb-6">
+                      {vehicleSegments[activeSegment].id}
+                    </span>
+                    <h3 className="text-3xl font-extrabold tracking-tight text-slate-900 mb-4">
+                      {vehicleSegments[activeSegment].title}
+                    </h3>
+                    <p className="text-lg text-slate-600 font-light mb-12">
+                      {vehicleSegments[activeSegment].target}
+                    </p>
+                    
+                    <h4 className="text-xs font-bold tracking-widest text-slate-400 uppercase mb-6 border-b border-slate-200 pb-2">Key Capabilities</h4>
+                    <ul className="space-y-4">
+                      {vehicleSegments[activeSegment].benefits.map((benefit, i) => (
+                        <li key={i} className="flex items-start gap-4 text-slate-700 font-light">
+                          <span className="text-slate-900 font-bold block mt-1">+</span> {benefit}
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                  
+                  <div className="mt-12 h-48 w-full bg-slate-200 overflow-hidden border border-slate-300">
+                     <img 
+                       src={vehicleSegments[activeSegment].img} 
+                       alt={vehicleSegments[activeSegment].title}
+                       className="w-full h-full object-cover filter grayscale opacity-80"
+                     />
+                  </div>
                 </div>
               </Fade>
             </div>
@@ -306,188 +332,264 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Sleek Partner Insights (Testimonials) */}
-      <section className="py-32 bg-[#fcfcfc] border-b border-slate-200">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      {/* 7 & 8. Core Technology & Features - High Density Bento Grid */}
+      <section id="technology" className="py-32 bg-[#fafafa] relative z-20">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <Fade direction="up" duration={1000} triggerOnce>
-            <div>
-              <h2 className="text-xs font-bold uppercase tracking-[0.2em] text-slate-400 mb-16">
-                04 // Market Feedback
+            <div className="mb-16">
+              <h2 className="text-[10px] font-bold uppercase tracking-[0.3em] text-slate-400 mb-6 flex items-center gap-3">
+                <span className="w-4 h-[1px] bg-slate-400"></span> 04 // Platform Architecture
               </h2>
-              <Slider {...sliderSettings}>
-                {[
-                  {
-                    quote: "Gloport Photonix is on the cutting edge of healthcare innovation. Their focus on early detection technologies will rewrite the diagnostic baseline.",
-                    author: "Dr. A. Sharma",
-                  },
-                  {
-                    quote: "The technology developed by Gloport has transformed our approach to diagnostics. It's a systemic leap forward in quantitative patient care.",
-                    author: "Dr. D K Thakur",
-                  },
-                ].map((item, idx) => (
-                  <div key={idx} className="focus:outline-none">
-                    <p className="text-2xl sm:text-3xl font-light text-slate-900 leading-relaxed mb-8">
-                      &quot;{item.quote}&quot;
-                    </p>
-                    <p className="text-xs font-bold tracking-[0.1em] text-slate-500 uppercase">
-                      — {item.author}
-                    </p>
-                  </div>
-                ))}
-              </Slider>
-            </div>
-          </Fade>
-        </div>
-      </section>
-
-      {/* Leadership - Structured Grid */}
-      <section id="team" className="py-32 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <Fade direction="up" duration={1000} triggerOnce>
-            <div className="flex flex-col md:flex-row md:items-end justify-between gap-8 mb-20 border-b border-slate-200 pb-8">
-              <div>
-                <h2 className="text-xs font-bold uppercase tracking-[0.2em] text-slate-400 mb-4">
-                  05 // Executive Committee
-                </h2>
-                <h3 className="text-4xl sm:text-5xl font-extrabold tracking-tight text-slate-900">
-                  Leadership
-                </h3>
-              </div>
+              <h3 className="text-4xl sm:text-5xl md:text-6xl font-extrabold tracking-tighter text-slate-900 leading-[0.95] max-w-3xl">
+                A Complete Connected Vehicle Intelligence Platform.
+              </h3>
             </div>
           </Fade>
 
-          <Fade cascade direction="up" duration={800} triggerOnce>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-16">
-              {[
-                {
-                  name: "DR. KHALID KHAN",
-                  role: "FOUNDER & CHAIRMAN",
-                  img: "https://i.postimg.cc/W1TXPLby/Whats-App-Image-2025-01-01-at-15-02-37.jpg",
-                  desc: "Entrepreneur & philanthropist with over four decades of foundational industry experience.",
-                },
-                {
-                  name: "MR. ABHIJEET THAKUR",
-                  role: "FOUNDER & CEO",
-                  img: "https://i.postimg.cc/fRVGPkr7/PHOTO-2019-07-24-10-01-41-jpg.jpg",
-                  desc: "28+ years of systemic excellence across IT, Cloud, AI, and enterprise electronic subsystems.",
-                },
-                {
-                  name: "DR. VARUN JEOTI",
-                  role: "CO-FOUNDER & CTO",
-                  img: "https://i.postimg.cc/bw5YrmtD/DMC8618.jpg",
-                  desc: "40 years of applied physics expertise specializing in biosensor innovation and photonic architecture.",
-                },
-                {
-                  name: "MR. SANJAY SINGH",
-                  role: "FOUNDER & CBO",
-                  img: "https://i.postimg.cc/LXVm1G7b/Whats-App-Image-2025-03-04-at-23-07-35.jpg",
-                  desc: "Seasoned executive executing strategic market positioning and operational scaling for 27+ years.",
-                },
-                {
-                  name: "MRS. BUSHRA KHAN",
-                  role: "FOUNDER & CFO",
-                  img: "https://i.postimg.cc/52gp47X2/Whats-App-Image-2025-01-01-at-15-02-37-1.jpg",
-                  desc: "Directing financial strategy, investment control, and rigid operational excellence protocols.",
-                },
-              ].map((member, idx) => (
-                <div key={idx} className="group relative">
-                  <div className="aspect-[3/4] bg-slate-100 mb-6 overflow-hidden">
-                    <img
-                      src={member.img}
-                      alt={member.name}
-                      className="w-full h-full object-cover object-top filter grayscale group-hover:grayscale-0 transition duration-700 ease-in-out"
-                    />
-                  </div>
-                  <h3 className="text-xl font-bold text-slate-900 tracking-tight mb-1">
-                    {member.name}
-                  </h3>
-                  <p className="text-xs font-bold tracking-[0.1em] text-slate-500 mb-4">
-                    {member.role}
-                  </p>
-                  <p className="text-slate-600 font-light text-sm leading-relaxed">
-                    {member.desc}
-                  </p>
-                </div>
-              ))}
-            </div>
-          </Fade>
-        </div>
-      </section>
-
-      {/* Typographic Contact Section */}
-      <section id="contact-us" className="bg-slate-950 text-white py-32 border-t border-slate-900">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <Fade direction="up" duration={1000} triggerOnce>
-            <div>
-              <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 mb-16">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-24 auto-rows-[300px]">
+            {/* Block 1 */}
+            <Fade direction="up" duration={1000} delay={100} triggerOnce className="h-full">
+              <div className="h-full bg-white p-10 border border-slate-200 flex flex-col justify-between group hover:border-slate-900 transition-colors">
+                <span className="text-[10px] font-bold tracking-widest text-slate-400">TECH-01</span>
                 <div>
-                  <h2 className="text-xs font-bold uppercase tracking-[0.2em] text-slate-500 mb-6">
-                    06 // Communications Directory
-                  </h2>
-                  <h3 className="text-4xl sm:text-5xl md:text-6xl font-extrabold tracking-tighter mb-8 leading-[0.9]">
-                    Initiate <br /> Connection.
-                  </h3>
-                  <p className="text-lg text-slate-400 font-light max-w-md">
-                    For corporate partnerships, technological inquiries, or investment relations, route your communications below.
-                  </p>
+                  <h4 className="text-2xl font-bold text-slate-900 mb-3">In-Vehicle Hardware</h4>
+                  <p className="text-slate-600 font-light text-sm mb-4">CAN/OBD/J1939 integration, GNSS positioning, cellular/Bluetooth/Wi-Fi configuration, edge processing, and secure device identity in an automotive-grade enclosure.</p>
+                </div>
+              </div>
+            </Fade>
+
+            {/* Block 2 */}
+            <Fade direction="up" duration={1000} delay={200} triggerOnce className="h-full">
+              <div className="h-full bg-slate-900 p-10 border border-slate-900 flex flex-col justify-between group">
+                <span className="text-[10px] font-bold tracking-widest text-slate-500">TECH-02</span>
+                <div>
+                  <h4 className="text-2xl font-bold text-white mb-3">Embedded Software & Edge</h4>
+                  <p className="text-slate-400 font-light text-sm mb-4">Real-time data processing, vehicle protocol handling, fault code interpretation, event detection, edge filtering, and OTA-ready architecture.</p>
+                </div>
+              </div>
+            </Fade>
+
+            {/* Block 3 */}
+            <Fade direction="up" duration={1000} delay={300} triggerOnce className="h-full">
+              <div className="h-full bg-white p-10 border border-slate-200 flex flex-col justify-between group hover:border-slate-900 transition-colors">
+                <span className="text-[10px] font-bold tracking-widest text-slate-400">TECH-03</span>
+                <div>
+                  <h4 className="text-2xl font-bold text-slate-900 mb-3">Cloud Platform</h4>
+                  <p className="text-slate-600 font-light text-sm mb-4">Live vehicle dashboard, fleet map, EV battery monitoring, driver scorecards, alerts, maintenance reports, and API integration for enterprise systems.</p>
+                </div>
+              </div>
+            </Fade>
+
+            {/* Block 4 */}
+            <Fade direction="up" duration={1000} delay={400} triggerOnce className="h-full">
+              <div className="h-full bg-white p-10 border border-slate-200 flex flex-col justify-between group hover:border-slate-900 transition-colors">
+                <span className="text-[10px] font-bold tracking-widest text-slate-400">TECH-04</span>
+                <div>
+                  <h4 className="text-2xl font-bold text-slate-900 mb-3">Mobile & Web Apps</h4>
+                  <p className="text-slate-600 font-light text-sm mb-4">Cross-platform access for fleet managers and drivers to view vehicle status, trip logs, alerts, battery insights, and role-based multi-vehicle management.</p>
+                </div>
+              </div>
+            </Fade>
+          </div>
+
+          {/* Feature Grid */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-x-8 gap-y-12 pt-16 border-t border-slate-200">
+             {[
+               { title: "Real-Time Connectivity", desc: "Monitor location, vehicle state, trip activity, and operational status." },
+               { title: "Remote Diagnostics", desc: "Capture fault codes, warning signals, and maintenance indicators." },
+               { title: "EV Battery Intelligence", desc: "Track performance, charging behavior, SOC, and thermal patterns." },
+               { title: "Fleet Optimization", desc: "Route planning, utilization analysis, idle tracking, and driver scoring." },
+               { title: "Predictive Maintenance", desc: "Use data trends to identify issues and reduce unplanned downtime." },
+               { title: "Driver Safety", desc: "Analyze braking, acceleration, overspeeding, and route behavior." },
+               { title: "Secure Architecture", desc: "Encrypted communication and authenticated device identities." },
+               { title: "OTA-Ready Evolution", desc: "Support future software updates and feature expansion remotely." },
+             ].map((feat, i) => (
+                <div key={i}>
+                  <div className="w-8 h-[1px] bg-slate-900 mb-4"></div>
+                  <h5 className="text-sm font-bold text-slate-900 mb-2">{feat.title}</h5>
+                  <p className="text-xs text-slate-500 font-light leading-relaxed">{feat.desc}</p>
+                </div>
+             ))}
+          </div>
+        </div>
+      </section>
+
+      {/* 9. Make In India & 13. Roadmap Section - High Contrast */}
+      <section id="make-in-india" className="py-32 bg-slate-950 text-white relative z-20">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-24">
+            
+            {/* Make In India */}
+            <div>
+              <Fade direction="up" duration={1000} triggerOnce>
+                <h2 className="text-[10px] font-bold uppercase tracking-[0.3em] text-slate-500 mb-6 flex items-center gap-3">
+                  <span className="w-4 h-[1px] bg-slate-500"></span> 05 // Strategic Vision
+                </h2>
+                <h3 className="text-4xl sm:text-5xl font-extrabold tracking-tighter mb-8 leading-[1]">
+                  Advancing Mobility Under <br /> The Make in India Vision.
+                </h3>
+                <p className="text-lg text-slate-400 font-light leading-relaxed mb-8">
+                  The objective is not only to import technology, but to localize, adapt, manufacture, test, deploy, and support telematics solutions for Indian mobility needs at scale.
+                </p>
+                
+                <div className="space-y-4">
+                   {["Indian market-specific product adaptation", "Local assembly and manufacturing roadmap", "Domestic supply chain development", "Cost-optimized deployment for scale", "Technology transfer and engineering collaboration"].map((item, i) => (
+                     <div key={i} className="flex items-center gap-4 text-sm text-slate-300 font-light">
+                       <span className="w-1.5 h-1.5 bg-slate-500 rounded-full"></span> {item}
+                     </div>
+                   ))}
                 </div>
 
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 auto-rows-max">
-                  {/* Office */}
-                  <div className="sm:col-span-2 border border-slate-800 p-8 hover:bg-slate-900 transition-colors">
-                    <span className="block text-[10px] font-bold tracking-widest text-slate-500 mb-6">OFFICE HQ</span>
-                    <h4 className="text-lg font-bold mb-2">Gloport Photonix Innovations</h4>
-                    <p className="text-slate-400 font-light text-sm leading-relaxed">
-                      21st Floor, 2103 - 2106, Kamdhenu 23 West,<br />
-                      TTC Industrial Area, Pawne,<br />
-                      Navi Mumbai, 400710
+                <div className="mt-12 p-6 border border-slate-800 bg-slate-900/50">
+                  <p className="text-sm font-bold tracking-wide text-white leading-relaxed uppercase">
+                    From German automotive intelligence to Indian manufacturing scale — made for India and ready for the world.
+                  </p>
+                </div>
+              </Fade>
+            </div>
+
+            {/* Roadmap */}
+            <div>
+              <Fade direction="up" duration={1000} delay={200} triggerOnce>
+                <h2 className="text-[10px] font-bold uppercase tracking-[0.3em] text-slate-500 mb-12">
+                  Development Roadmap
+                </h2>
+                
+                <div className="relative border-l border-slate-800 ml-3 space-y-12">
+                  {[
+                    { phase: "Phase 1", title: "Architecture & Mapping", desc: "Define segments, hardware configuration, cloud requirements, and India-specific deployment needs." },
+                    { phase: "Phase 2", title: "Prototype Development", desc: "Build and test the TCU, embedded software, cloud integration, and connectivity stack." },
+                    { phase: "Phase 3", title: "Vehicle Integration & Pilot", desc: "Deploy in selected conventional vehicles, EVs, and heavy-duty fleets for real-world validation." },
+                    { phase: "Phase 4", title: "Make in India Localization", desc: "Optimize components, manufacturing workflow, and serviceability for Indian scale." },
+                    { phase: "Phase 5", title: "Commercial Rollout", desc: "Launch for OEMs, fleets, logistics companies, and enterprise mobility partners." },
+                  ].map((step, i) => (
+                    <div key={i} className="relative pl-8">
+                      <div className="absolute w-2 h-2 bg-white rounded-full -left-[4.5px] top-1.5"></div>
+                      <span className="text-[10px] font-bold tracking-[0.2em] text-slate-500 block mb-1 uppercase">{step.phase}</span>
+                      <h4 className="text-lg font-bold text-white mb-2">{step.title}</h4>
+                      <p className="text-sm text-slate-400 font-light">{step.desc}</p>
+                    </div>
+                  ))}
+                </div>
+              </Fade>
+            </div>
+
+          </div>
+        </div>
+      </section>
+
+      {/* 11. Competitive Advantage & 16. Trust */}
+      <section className="py-32 bg-white relative z-20 border-b border-slate-200">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+           <Fade direction="up" duration={1000} triggerOnce>
+            <h2 className="text-[10px] font-bold uppercase tracking-[0.3em] text-slate-400 mb-16">
+              06 // The Advantage
+            </h2>
+            <h3 className="text-3xl sm:text-4xl md:text-5xl font-light tracking-tight text-slate-900 mb-20 max-w-4xl mx-auto leading-tight">
+              Automotive telematics must operate in demanding environments. We focus on <strong className="font-bold">reliability, secure connectivity, scalable deployment,</strong> and <strong className="font-bold">long-term maintainability.</strong>
+            </h3>
+           </Fade>
+
+           <Fade direction="up" duration={1000} delay={200} triggerOnce>
+             <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center border-t border-slate-200 pt-16">
+               <div>
+                 <h4 className="text-2xl font-extrabold text-slate-900 mb-2">EV + ICE</h4>
+                 <p className="text-xs text-slate-500 uppercase tracking-widest font-bold">Compatibility</p>
+               </div>
+               <div>
+                 <h4 className="text-2xl font-extrabold text-slate-900 mb-2">Automotive</h4>
+                 <p className="text-xs text-slate-500 uppercase tracking-widest font-bold">Grade Design</p>
+               </div>
+               <div>
+                 <h4 className="text-2xl font-extrabold text-slate-900 mb-2">OTA Ready</h4>
+                 <p className="text-xs text-slate-500 uppercase tracking-widest font-bold">Architecture</p>
+               </div>
+               <div>
+                 <h4 className="text-2xl font-extrabold text-slate-900 mb-2">India</h4>
+                 <p className="text-xs text-slate-500 uppercase tracking-widest font-bold">Optimized</p>
+               </div>
+             </div>
+           </Fade>
+        </div>
+      </section>
+
+      {/* 12. Pilot Program & 17. Mega CTA Section */}
+      <section id="contact-us" className="bg-slate-950 text-white pt-32 pb-16 relative z-20">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <Fade direction="up" duration={1000} triggerOnce>
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 mb-24">
+              
+              <div className="lg:col-span-5">
+                <h2 className="text-[10px] font-bold uppercase tracking-[0.3em] text-slate-500 mb-6 flex items-center gap-3">
+                  <span className="w-4 h-[1px] bg-slate-500"></span> 07 // Pilot & Partnership
+                </h2>
+                <h3 className="text-5xl sm:text-6xl font-extrabold tracking-tighter mb-8 leading-[0.9]">
+                  Ready to Build <br /> The Future?
+                </h3>
+                <p className="text-lg text-slate-400 font-light max-w-md mb-8">
+                  We invite Indian OEMs, EV manufacturers, fleet operators, and logistics companies to participate in our pilot deployments. Validate the technology across real-world Indian road conditions.
+                </p>
+                <div className="flex gap-4">
+                  <button className="px-6 py-3 bg-white text-slate-900 text-[10px] font-bold tracking-widest uppercase hover:bg-slate-200 transition-colors">
+                    Request Demo
+                  </button>
+                  <button className="px-6 py-3 border border-slate-700 text-white text-[10px] font-bold tracking-widest uppercase hover:bg-slate-800 transition-colors">
+                    Join Pilot
+                  </button>
+                </div>
+              </div>
+
+              <div className="lg:col-span-7">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-px bg-slate-800 border border-slate-800">
+                  {/* Form Trigger (Simulated for UI layout) */}
+                  <div className="sm:col-span-2 bg-slate-950 p-12 hover:bg-slate-900 transition-colors">
+                    <span className="block text-[10px] font-bold tracking-widest text-slate-500 mb-6">PARTNERSHIP INQUIRY</span>
+                    <h4 className="text-2xl font-bold mb-4 tracking-tight">Enterprise Collaboration</h4>
+                    <p className="text-slate-400 font-light text-sm leading-relaxed mb-6 max-w-lg">
+                      Interested In: OEM Integration / Fleet Pilot / EV Analytics / Heavy Vehicle Telematics / Partnership / Investment. Reach out directly.
                     </p>
                   </div>
 
-                  {/* Email */}
+                  {/* Email Copy */}
                   <div 
-                    onClick={() => handleCopy("info@gloportphotonix.com", "email")}
-                    className="border border-slate-800 p-8 hover:bg-white hover:text-slate-900 transition-all duration-300 cursor-pointer group flex flex-col justify-between"
+                    onClick={() => handleCopy("partnerships@gloport.com", "email")}
+                    className="bg-slate-950 p-10 hover:bg-white hover:text-slate-900 transition-all duration-300 cursor-pointer group flex flex-col justify-between min-h-[180px]"
                   >
-                    <span className="block text-[10px] font-bold tracking-widest text-slate-500 group-hover:text-slate-400 mb-6 transition-colors">DIGITAL MAIL</span>
+                    <span className="block text-[10px] font-bold tracking-[0.2em] text-slate-500 group-hover:text-slate-400 mb-6 transition-colors">DIGITAL MAIL</span>
                     <div>
-                      <h4 className="text-sm font-bold mb-4 break-all">info@gloportphotonix.com</h4>
-                      <span className="text-xs tracking-widest uppercase font-semibold text-slate-600 group-hover:text-slate-900 transition-colors">
-                        {copiedStatus === "email" ? "[ COPIED ]" : "[ COPY ]"}
+                      <h4 className="text-sm font-bold mb-6 break-all">[ Email Placeholder ]</h4>
+                      <span className="text-[10px] tracking-widest uppercase font-bold border border-slate-800 group-hover:border-slate-300 px-4 py-2 transition-colors">
+                        {copiedStatus === "email" ? "COPIED TO CLIPBOARD" : "COPY ADDRESS"}
                       </span>
                     </div>
                   </div>
 
-                  {/* Phone */}
+                  {/* Phone Copy */}
                   <div 
-                    onClick={() => handleCopy("+91 98333 96290", "phone")}
-                    className="border border-slate-800 p-8 hover:bg-white hover:text-slate-900 transition-all duration-300 cursor-pointer group flex flex-col justify-between"
+                    onClick={() => handleCopy("+91 00000 00000", "phone")}
+                    className="bg-slate-950 p-10 hover:bg-white hover:text-slate-900 transition-all duration-300 cursor-pointer group flex flex-col justify-between min-h-[180px]"
                   >
-                    <span className="block text-[10px] font-bold tracking-widest text-slate-500 group-hover:text-slate-400 mb-6 transition-colors">DIRECT LINE</span>
+                    <span className="block text-[10px] font-bold tracking-[0.2em] text-slate-500 group-hover:text-slate-400 mb-6 transition-colors">DIRECT LINE</span>
                     <div>
-                      <h4 className="text-sm font-bold mb-4">+91 98333 96290</h4>
-                      <span className="text-xs tracking-widest uppercase font-semibold text-slate-600 group-hover:text-slate-900 transition-colors">
-                        {copiedStatus === "phone" ? "[ COPIED ]" : "[ COPY ]"}
+                      <h4 className="text-sm font-bold mb-6">[ Phone Placeholder ]</h4>
+                      <span className="text-[10px] tracking-widest uppercase font-bold border border-slate-800 group-hover:border-slate-300 px-4 py-2 transition-colors">
+                        {copiedStatus === "phone" ? "COPIED TO CLIPBOARD" : "COPY NUMBER"}
                       </span>
                     </div>
                   </div>
                 </div>
               </div>
+            </div>
 
-              {/* Map Frame */}
-              <div className="w-full h-[300px] border border-slate-800 relative group overflow-hidden">
-                <iframe
-                  className="w-full h-full filter grayscale contrast-125 opacity-70 group-hover:opacity-100 transition-all duration-700"
-                  src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d15081.179657558912!2d73.0223884!3d19.0947139!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3be7c1533508abb7%3A0x2a007395760b59ce!2sGloport%20Photonix!5e0!3m2!1sen!2sin!4v1735132689648!5m2!1sen!2sin"
-                  allowFullScreen
-                  loading="lazy"
-                  referrerPolicy="no-referrer-when-downgrade"
-                  style={{ border: 0 }}
-                  title="Company Location"
-                ></iframe>
-                <div className="absolute top-4 left-4 bg-slate-950 px-3 py-1 text-[10px] font-bold tracking-widest border border-slate-800">
-                  GEO-LOCATION
-                </div>
+            {/* Footer Bottom */}
+            <div className="flex flex-col md:flex-row justify-between items-start md:items-center pt-8 border-t border-slate-900 text-[10px] tracking-widest text-slate-500 uppercase font-bold gap-4">
+              <div>
+                <p className="mb-1 text-white">Gloport × CarTelSol Germany</p>
+                <p className="text-slate-600 font-normal">Futuristic Telematics for India’s Connected Mobility Era</p>
+              </div>
+              <div className="text-left md:text-right">
+                <p className="mb-1">© {new Date().getFullYear()} Gloport. All Rights Reserved.</p>
+                <p className="text-[8px] text-slate-700 font-normal max-w-md">CarTelSol Germany collaboration mentioned for the Indian market telematics initiative. Final product specifications may evolve during development.</p>
               </div>
             </div>
           </Fade>
@@ -497,22 +599,19 @@ export default function Home() {
       {/* Typographic Scroll to Top */}
       <button
         onClick={scrollToTop}
-        className={`fixed bottom-8 right-8 z-50 bg-slate-900 text-white px-4 py-3 text-xs font-bold tracking-[0.2em] hover:bg-slate-800 transition-all duration-500 border border-slate-700 ${scrollY > 500 ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4 pointer-events-none"}`}
+        className={`fixed bottom-8 right-8 z-50 bg-slate-900 text-white px-5 py-4 text-[10px] font-bold tracking-[0.2em] hover:bg-slate-800 transition-all duration-500 border border-slate-700 shadow-2xl ${scrollY > 800 ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8 pointer-events-none"}`}
         aria-label="Scroll to top"
       >
-        TOP
+        TO TOP ↑
       </button>
 
-      <style
-        dangerouslySetInnerHTML={{
-          __html: `
-        @keyframes slideRight {
-          0% { transform: translateX(-100%); }
-          100% { transform: translateX(300%); }
+      {/* CSS Keyframes for Hero Animation */}
+      <style dangerouslySetInnerHTML={{__html: `
+        @keyframes slideLeft {
+          0% { transform: translateX(0); }
+          100% { transform: translateX(-50%); }
         }
-      `,
-        }}
-      />
+      `}} />
     </div>
   );
 }
