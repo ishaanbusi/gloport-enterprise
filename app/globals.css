@@ -1,10 +1,10 @@
 @import "tailwindcss";
 
-@theme inline {
-  /* You can define custom theme variables here later if needed */
+@theme {
+  /* This registers your custom brand color for Tailwind v4 */
+  --color-brand: #3bd6c6;
 }
 
 body {
-  /* Let Tailwind's classes in page.js control the background and text color */
-  @apply bg-[#fcfcfc] text-slate-900 antialiased;
+  @apply bg-slate-950 text-white antialiased;
 }
