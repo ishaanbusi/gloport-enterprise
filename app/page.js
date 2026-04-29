@@ -177,79 +177,216 @@ export default function TelematicsLanding() {
         )}
       </header>
 
-      {/* ═══ HERO ═══════════════════════════════════════════════════════════ */}
-      <section id="home" style={{position:"relative",minHeight:"100vh",overflow:"hidden",background:DARK,display:"flex",alignItems:"center"}}>
-        <div style={{position:"absolute",inset:0}}>
-          <img src="https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?auto=format&fit=crop&q=80&w=2000"
-            alt="" style={{width:"100%",height:"100%",objectFit:"cover",opacity:.22,transform:`translateY(${scrollY*.25}px)`,filter:"saturate(.6)"}}/>
-          <div style={{position:"absolute",inset:0,background:"linear-gradient(to bottom, rgba(12,31,29,.6) 0%, rgba(12,31,29,.45) 50%, rgba(12,31,29,1) 100%)"}}/>
-          <div style={{position:"absolute",top:"30%",right:"8%",width:520,height:520,borderRadius:"50%",
-            background:"radial-gradient(circle, rgba(59,214,198,.18) 0%, transparent 70%)",filter:"blur(40px)",pointerEvents:"none"}}/>
-        </div>
+      {/* ═══ HERO (Mobile Optimized) ═════════════════════════════════════════ */}
+<section
+  id="home"
+  style={{
+    position: "relative",
+    minHeight: "100vh",
+    overflow: "hidden",
+    background: DARK,
+    display: "flex",
+    alignItems: "center",
+  }}
+>
+  {/* Background */}
+  <div style={{ position: "absolute", inset: 0 }}>
+    <img
+      src="https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?auto=format&fit=crop&q=80&w=2000"
+      alt=""
+      style={{
+        width: "100%",
+        height: "100%",
+        objectFit: "cover",
+        opacity: 0.22,
+        transform: `translateY(${scrollY * 0.2}px)`,
+        filter: "saturate(.6)",
+      }}
+    />
 
-        <div style={{position:"relative",zIndex:10,maxWidth:1200,margin:"0 auto",padding:"130px 24px 110px",width:"100%",
-          opacity:isLoaded?1:0,transform:isLoaded?"translateY(0)":"translateY(20px)",transition:"all .9s ease"}}>
-          {/* Badge */}
-          {/* <div className="fu0" style={{display:"inline-flex",alignItems:"center",gap:10,background:"rgba(59,214,198,.1)",
-            border:"1px solid rgba(59,214,198,.3)",borderRadius:999,padding:"6px 16px",marginBottom:28}}>
-            <div style={{width:6,height:6,borderRadius:"50%",background:BRAND}}/>
-            <span style={{fontSize:11,fontWeight:700,letterSpacing:"0.2em",color:BRAND,textTransform:"uppercase"}}>
-              Gloport × CarTelSol Germany
+    {/* Stronger mobile gradient */}
+    <div
+      style={{
+        position: "absolute",
+        inset: 0,
+        background:
+          "linear-gradient(to bottom, rgba(12,31,29,.8) 0%, rgba(12,31,29,.6) 50%, rgba(12,31,29,1) 100%)",
+      }}
+    />
+
+    {/* Glow */}
+    <div
+      className="hero-glow"
+      style={{
+        position: "absolute",
+        top: "30%",
+        right: "8%",
+        width: 520,
+        height: 520,
+        borderRadius: "50%",
+        background:
+          "radial-gradient(circle, rgba(59,214,198,.18) 0%, transparent 70%)",
+        filter: "blur(40px)",
+        pointerEvents: "none",
+      }}
+    />
+  </div>
+
+  {/* Content */}
+  <div
+    className="hero-content"
+    style={{
+      position: "relative",
+      zIndex: 10,
+      maxWidth: 1200,
+      margin: "0 auto",
+      padding: "120px 24px 100px",
+      width: "100%",
+      opacity: isLoaded ? 1 : 0,
+      transform: isLoaded ? "translateY(0)" : "translateY(20px)",
+      transition: "all .9s ease",
+    }}
+  >
+    <h1
+      style={{
+        fontSize: "clamp(2rem, 7vw, 5rem)",
+        fontWeight: 800,
+        color: "white",
+        lineHeight: 1.1,
+        letterSpacing: "-0.02em",
+        maxWidth: 700,
+        marginBottom: 18,
+      }}
+    >
+      Futuristic Telematics for{" "}
+      <span style={{ color: BRAND }}>Connected Mobility.</span>
+    </h1>
+
+    <p
+      className="hero-sub"
+      style={{
+        fontSize: "clamp(0.95rem, 2.5vw, 1.1rem)",
+        color: "rgba(255,255,255,.65)",
+        lineHeight: 1.7,
+        maxWidth: 520,
+        marginBottom: 28,
+        paddingLeft: 14,
+        borderLeft: "2px solid rgba(59,214,198,.35)",
+      }}
+    >
+      Gloport, in collaboration with CarTelSol Germany, is developing an advanced automotive telematics unit for the Indian market.
+    </p>
+
+    {/* Buttons */}
+    <div className="hero-btns" style={{ display: "flex", gap: 14, flexWrap: "wrap", marginBottom: 40 }}>
+      <a href="#solution" className="brand-btn-css hero-btn-full" style={S.brandBtn}>
+        Explore the Solution <ArrowRight size={16} />
+      </a>
+      <a href="#contact-us" className="ghost-btn-css hero-btn-full" style={S.ghostBtn}>
+        Contact Us
+      </a>
+    </div>
+
+    {/* Stats */}
+    <div className="hero-stats" style={{ display: "flex", gap: 32, flexWrap: "wrap" }}>
+      {[["4+", "Vehicle Segments"], ["EV + ICE", "Dual Compatible"], ["AIS-140", "Ready"], ["OTA", "Architecture"]].map(([v, l]) => (
+        <div key={l}>
+          <div style={{ fontSize: 20, fontWeight: 800, color: BRAND }}>{v}</div>
+          <div style={{ fontSize: 10, fontWeight: 600, color: "rgba(255,255,255,.4)", letterSpacing: "0.1em", textTransform: "uppercase" }}>
+            {l}
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+
+  {/* Hide scroll on mobile */}
+  <div className="hero-scroll">
+    <div
+      style={{
+        position: "absolute",
+        bottom: 100,
+        left: "50%",
+        transform: "translateX(-50%)",
+        zIndex: 20,
+        textAlign: "center",
+        cursor: "pointer",
+      }}
+      onClick={() =>
+        document.getElementById("solution")?.scrollIntoView({ behavior: "smooth" })
+      }
+    >
+      <div style={{ color: "rgba(255,255,255,.3)", fontSize: 9, letterSpacing: "0.25em", marginBottom: 8 }}>
+        Scroll
+      </div>
+      <div style={{ width: 1, height: 52, background: "rgba(255,255,255,.15)" }} />
+    </div>
+  </div>
+
+  {/* Ticker (smaller on mobile) */}
+  <div className="hero-ticker"
+    style={{
+      position: "absolute",
+      bottom: 0,
+      width: "100%",
+      overflow: "hidden",
+      borderTop: "1px solid rgba(59,214,198,.1)",
+      background: "rgba(12,31,29,.75)",
+      backdropFilter: "blur(12px)",
+      padding: "10px 0",
+      zIndex: 20,
+    }}
+  >
+    <div className="ticker-track">
+      {[...Array(4)].map((_, i) => (
+        <div key={i} style={{ display: "flex", gap: 24, paddingRight: 24 }}>
+          {["Connected Vehicles", "EV Intelligence", "Fleet Visibility"].map((t) => (
+            <span key={t} style={{ fontSize: 9, color: "rgba(59,214,198,.5)" }}>
+              {t}
             </span>
-          </div> */}
-
-          <h1 className="fu1" style={{fontSize:"clamp(2.6rem,6.5vw,5.5rem)",fontWeight:800,color:"white",
-            lineHeight:1.05,letterSpacing:"-0.02em",maxWidth:760,marginBottom:22}}>
-            Futuristic Telematics for{" "}
-            <span style={{color:BRAND}}>Connected Mobility.</span>
-          </h1>
-
-          <p className="fu2" style={{fontSize:"clamp(1rem,2vw,1.15rem)",color:"rgba(255,255,255,.5)",fontWeight:400,
-            lineHeight:1.8,maxWidth:540,marginBottom:38,paddingLeft:16,borderLeft:"2px solid rgba(59,214,198,.35)"}}>
-            Gloport, in collaboration with CarTelSol Germany, is developing an advanced automotive telematics unit for the Indian market for cars, fleets, EVs, buses, trucks, and heavy-duty mobility.
-          </p>
-
-          <div className="fu3 mob-col" style={{display:"flex",gap:14,flexWrap:"wrap",marginBottom:56}}>
-            <a href="#solution" className="brand-btn-css mob-full" style={S.brandBtn}>Explore the Solution <ArrowRight size={16}/></a>
-            <a href="#contact-us" className="ghost-btn-css mob-full" style={S.ghostBtn}>Contact Us</a>
-          </div>
-
-          <div className="fu3" style={{display:"flex",gap:36,flexWrap:"wrap"}}>
-            {[["4+","Vehicle Segments"],["EV + ICE","Dual Compatible"],["AIS-140","Ready"],["OTA","Architecture"]].map(([v,l])=>(
-              <div key={l}>
-                <div style={{fontSize:22,fontWeight:800,color:BRAND}}>{v}</div>
-                <div style={{fontSize:10,fontWeight:600,color:"rgba(255,255,255,.3)",letterSpacing:"0.1em",textTransform:"uppercase",marginTop:3}}>{l}</div>
-              </div>
-            ))}
-          </div>
+          ))}
         </div>
+      ))}
+    </div>
+  </div>
 
-        {/* Scroll indicator */}
-        <div style={{position:"absolute",bottom:100,left:"50%",transform:"translateX(-50%)",zIndex:20,textAlign:"center",cursor:"pointer"}}
-          onClick={()=>document.getElementById("solution")?.scrollIntoView({behavior:"smooth"})}>
-          <div style={{color:"rgba(255,255,255,.3)",fontSize:9,letterSpacing:"0.25em",textTransform:"uppercase",marginBottom:8}}>Scroll</div>
-          <div style={{width:1,height:52,background:"rgba(255,255,255,.15)",margin:"0 auto",position:"relative",overflow:"hidden"}}>
-            <div style={{position:"absolute",top:0,left:0,width:"100%",height:"50%",background:BRAND,animation:"scrolldown 2s ease-in-out infinite"}}/>
-          </div>
-        </div>
+  {/* Responsive Fixes */}
+  <style>{`
+    @media (max-width: 768px) {
+      .hero-content {
+        padding: 90px 20px 80px !important;
+        text-align: center;
+      }
 
-        {/* Ticker */}
-        <div style={{position:"absolute",bottom:0,width:"100%",overflow:"hidden",borderTop:"1px solid rgba(59,214,198,.1)",
-          background:"rgba(12,31,29,.75)",backdropFilter:"blur(12px)",padding:"11px 0",zIndex:20}}>
-          <div className="ticker-track">
-            {[...Array(4)].map((_,i)=>(
-              <div key={i} style={{display:"flex",gap:32,alignItems:"center",paddingRight:32,whiteSpace:"nowrap"}}>
-                {["Connected Vehicles","EV Intelligence","Fleet Visibility","Remote Diagnostics","Secure Data","Make in India"].map(t=>(
-                  <React.Fragment key={t}>
-                    <span style={{fontSize:10,fontWeight:700,letterSpacing:"0.25em",textTransform:"uppercase",color:"rgba(59,214,198,.4)"}}>{t}</span>
-                    <span style={{color:BRAND,fontSize:8}}>◆</span>
-                  </React.Fragment>
-                ))}
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
+      .hero-sub {
+        border-left: none !important;
+        padding-left: 0 !important;
+      }
+
+      .hero-btn-full {
+        width: 100%;
+        justify-content: center;
+      }
+
+      .hero-btns {
+        flex-direction: column;
+      }
+
+      .hero-stats {
+        justify-content: center;
+        gap: 20px;
+      }
+
+      .hero-glow {
+        display: none;
+      }
+
+      .hero-scroll {
+        display: none;
+      }
+    }
+  `}</style>
+</section>
 
       {/* ═══ ABOUT / PARTNERSHIP ════════════════════════════════════════════ */}
       <section id="solution" style={{padding:"96px 0",background:"white"}}>
