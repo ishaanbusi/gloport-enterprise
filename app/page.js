@@ -540,7 +540,7 @@ export default function TelematicsLanding() {
             padding:"24px"
           }}>
             <h3 style={{
-              fontSize:16,
+              fontSize:14,
               fontWeight:700,
               color:"white",
               marginBottom:6,
@@ -743,7 +743,7 @@ export default function TelematicsLanding() {
               <div style={S.iconBox}><MapPin size={22}/></div>
               <div>
                 <h4 style={{fontSize:16,fontWeight:700,color:"#0f2220",marginBottom:6}}>Our Office</h4>
-                <p style={{fontSize:13,color:"#94a3b8",lineHeight:1.7,margin:0}}><strong style={{color:"#475569"}}>Gloport Enterprise Technogies</strong><br/>21st Floor, 2103 - 2106, Kamdhenu 23 West, TTC Industrial Area, Pawne, Navi Mumbai, 400710</p>
+                <p style={{fontSize:13,color:"#94a3b8",lineHeight:1.7,margin:0}}><strong style={{color:"#475569"}}>Gloport Enterprise Technologies</strong><br/>21st Floor, 2103 - 2106, Kamdhenu 23 West, TTC Industrial Area, Pawne, Navi Mumbai, 400710</p>
               </div>
             </div>
 
