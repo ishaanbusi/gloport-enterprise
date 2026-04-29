@@ -145,7 +145,7 @@ export default function TelematicsLanding() {
         <div style={{...S.inner, display:"flex", alignItems:"center", justifyContent:"space-between"}}>
           <div style={{display:"flex", alignItems:"center", gap:8}}>
             
-            <span style={{fontWeight:800,fontSize:23,letterSpacing:"0.12em",color:"#00fff7"}}>
+            <span style={{fontWeight:800,fontSize:23,letterSpacing:"0.12em",color:"#3bd6c6"}}>
               GLOPORT <span style={{color:BRAND}}></span>ENTERPRISE
             </span>
           </div>
@@ -155,7 +155,7 @@ export default function TelematicsLanding() {
               <a key={id} href={`#${id}`} style={{fontSize:13,fontWeight:500,color:"#64748b",textDecoration:"none",transition:"color .2s"}}
                 onMouseEnter={e=>e.target.style.color=BRAND} onMouseLeave={e=>e.target.style.color="#64748b"}>{lbl}</a>
             ))}
-            <a href="#contact-us" className="brand-btn-css" style={{...S.brandBtn,fontSize:12,padding:"10px 20px"}}>Join Pilot</a>
+            <a href="#contact-us" className="brand-btn-css" style={{...S.brandBtn,fontSize:12,padding:"10px 20px"}}>Reach Us</a>
           </nav>
           {/* Burger */}
           <button className="show-mob" onClick={()=>setMenuOpen(!menuOpen)}
@@ -211,7 +211,7 @@ export default function TelematicsLanding() {
 
           <div className="fu3 mob-col" style={{display:"flex",gap:14,flexWrap:"wrap",marginBottom:56}}>
             <a href="#solution" className="brand-btn-css mob-full" style={S.brandBtn}>Explore the Solution <ArrowRight size={16}/></a>
-            <a href="#contact-us" className="ghost-btn-css mob-full" style={S.ghostBtn}>Join Pilot Program</a>
+            <a href="#contact-us" className="ghost-btn-css mob-full" style={S.ghostBtn}>Contact Us</a>
           </div>
 
           <div className="fu3" style={{display:"flex",gap:36,flexWrap:"wrap"}}>
@@ -341,10 +341,10 @@ export default function TelematicsLanding() {
 
           <div style={{display:"grid",gridTemplateColumns:"repeat(auto-fit,minmax(210px,1fr))",gap:12,marginBottom:24}}>
             {[
-              {n:"01",l:"SOURCE",    t:"Vehicle Data",    s:"CAN / OBD-II / J1939 / Sensors / Battery", accent:false},
+              {n:"01",l:"SOURCE",    t:"Vehicle Data",    s:"CAN / OBD-II / J1939 / Sensors / Battery", accent:true},
               {n:"02",l:"HARDWARE",  t:"Telematics Unit", s:"Edge processing & secure cellular transmission", accent:true},
-              {n:"03",l:"CLOUD",     t:"Secure Platform", s:"Data engine, OTA updates, and API gateway", accent:false},
-              {n:"04",l:"INTERFACE", t:"Apps & Dashboards",s:"Fleet intelligence, diagnostics & OEM APIs", accent:false},
+              {n:"03",l:"CLOUD",     t:"Secure Platform", s:"Data engine, OTA updates, and API gateway", accent:true},
+              {n:"04",l:"INTERFACE", t:"Apps & Dashboards",s:"Fleet intelligence, diagnostics & OEM APIs", accent:true},
             ].map((item,i)=>(
               <div key={i} style={{
                 padding:"26px 24px",
@@ -451,8 +451,9 @@ export default function TelematicsLanding() {
       </section>
 
       {/* Team Section - Interactive Reveal Cards */}
-      <section id="team" style={{padding:"96px 0",background:"white"}}>
+<section id="team" style={{padding:"96px 0",background:"white"}}>
   <div style={S.inner}>
+    
     <div style={{textAlign:"center",maxWidth:640,margin:"0 auto 56px"}}>
       <div style={{...S.chip,justifyContent:"center"}}>
         <span style={S.chipBar}/>Leadership
@@ -460,7 +461,7 @@ export default function TelematicsLanding() {
       <h2 style={{...S.h2,marginBottom:14}}>Meet the Experts</h2>
     </div>
 
-    <div className="team-grid" style={{gap:24}}>
+    <div className="team-grid">
       {[
         {
           name: "MR. ABHIJEET THAKUR",
@@ -493,13 +494,14 @@ export default function TelematicsLanding() {
           style={{
             ...S.card,
             border:"1.5px solid #e2e8f0",
-            height:380,
+            height:400,
             position:"relative",
             overflow:"hidden",
             display:"flex",
             flexDirection:"column"
           }}
         >
+          {/* Image */}
           <div style={{position:"absolute",inset:0,zIndex:0}}>
             <img
               src={member.img}
@@ -508,36 +510,60 @@ export default function TelematicsLanding() {
                 width:"100%",
                 height:"100%",
                 objectFit:"cover",
-                objectPosition:"top"
+                objectPosition:"top",
+                filter:"brightness(0.85)"
               }}
             />
+
+            {/* Strong Gradient Overlay */}
             <div
               style={{
                 position:"absolute",
                 inset:0,
-                background:"linear-gradient(to bottom,transparent 40%,rgba(15,34,32,.85) 100%)"
+                background:`
+                  linear-gradient(
+                    to bottom,
+                    rgba(0,0,0,0.05) 0%,
+                    rgba(0,0,0,0.3) 40%,
+                    rgba(12,31,29,0.95) 100%
+                  )
+                `
               }}
             />
           </div>
 
-          <div style={{position:"relative",zIndex:1,marginTop:"auto",padding:"20px"}}>
-            <h3 style={{fontSize:14,fontWeight:700,color:"white",marginBottom:4}}>
+          {/* Content */}
+          <div style={{
+            position:"relative",
+            zIndex:1,
+            marginTop:"auto",
+            padding:"24px"
+          }}>
+            <h3 style={{
+              fontSize:16,
+              fontWeight:700,
+              color:"white",
+              marginBottom:6,
+              letterSpacing:"0.02em"
+            }}>
               {member.name}
             </h3>
+
             <p style={{
-              fontSize:11,
+              fontSize:12,
               fontWeight:600,
               color:BRAND,
-              marginBottom:8,
-              letterSpacing:"0.06em",
+              marginBottom:10,
+              letterSpacing:"0.08em",
               textTransform:"uppercase"
             }}>
               {member.role}
             </p>
+
             <p style={{
-              fontSize:12,
-              color:"rgba(255,255,255,.7)",
-              lineHeight:1.6,
+              fontSize:13,
+              color:"rgba(255,255,255,.85)",
+              lineHeight:1.7,
               margin:0
             }}>
               {member.desc}
@@ -717,7 +743,7 @@ export default function TelematicsLanding() {
               <div style={S.iconBox}><MapPin size={22}/></div>
               <div>
                 <h4 style={{fontSize:16,fontWeight:700,color:"#0f2220",marginBottom:6}}>Our Office</h4>
-                <p style={{fontSize:13,color:"#94a3b8",lineHeight:1.7,margin:0}}><strong style={{color:"#475569"}}>Gloport Enterprise</strong><br/>21st Floor, 2103 - 2106, Kamdhenu 23 West, TTC Industrial Area, Pawne, Navi Mumbai, 400710</p>
+                <p style={{fontSize:13,color:"#94a3b8",lineHeight:1.7,margin:0}}><strong style={{color:"#475569"}}>Gloport Enterprise Technogies</strong><br/>21st Floor, 2103 - 2106, Kamdhenu 23 West, TTC Industrial Area, Pawne, Navi Mumbai, 400710</p>
               </div>
             </div>
 
@@ -755,10 +781,10 @@ export default function TelematicsLanding() {
               <h3 style={{fontSize:24,fontWeight:800,color:"white",marginBottom:8}}>Start Your Pilot Today</h3>
               <p style={{fontSize:14,color:"rgba(255,255,255,.4)",margin:0,lineHeight:1.7}}>Validate technology across real-world Indian road conditions.</p>
             </div>
-            <div style={{display:"flex",gap:12,flexWrap:"wrap"}}>
+            {/* <div style={{display:"flex",gap:12,flexWrap:"wrap"}}>
               <button className="brand-btn-css" style={S.brandBtn}>Request Demo <ArrowRight size={16}/></button>
               <button className="ghost-btn-css" style={S.ghostBtn}>Join Pilot Program</button>
-            </div>
+            </div> */}
           </div>
         </div>
       </section>
@@ -770,11 +796,11 @@ export default function TelematicsLanding() {
             <div style={{fontWeight:800,fontSize:23,letterSpacing:"0.1em",color:"white",marginBottom:4}}>
               Gloport Enterprise
             </div>
-            <div style={{fontSize:12,color:"rgba(255,255,255,.25)"}}>Futuristic Telematics for India's Connected Mobility Era</div>
+            <div style={{fontSize:12,color:"rgba(255,255,255,.25)"}}>Futuristic Telematics for India&apos;s Connected Mobility Era</div>
           </div>
           <div style={{textAlign:"right"}}>
-            <div style={{fontSize:12,color:"rgba(255,255,255,.2)",marginBottom:4}}>© {new Date().getFullYear()} Gloport. All Rights Reserved.</div>
-            <div style={{fontSize:10,color:"rgba(255,255,255,.1)",maxWidth:360}}>CarTelSol Germany collaboration mentioned for the Indian market telematics initiative. Final product specifications may evolve.</div>
+            <div style={{fontSize:12,color:"rgba(255,255,255,.2)",marginBottom:4}}>© {new Date().getFullYear()} Gloport Enterprise. All Rights Reserved.</div>
+            {/* <div style={{fontSize:10,color:"rgba(255,255,255,.1)",maxWidth:360}}>CarTelSol Germany collaboration mentioned for the Indian market telematics initiative. Final product specifications may evolve.</div> */}
           </div>
         </div>
       </footer>
