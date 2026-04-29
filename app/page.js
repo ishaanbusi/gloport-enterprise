@@ -811,7 +811,7 @@ export default function TelematicsLanding() {
             display:"grid",gridTemplateColumns:"repeat(auto-fit,minmax(140px,1fr))",gap:20}}>
             {[["EV + ICE","Compatibility"],["Automotive","Grade Design"],["OTA Ready","Architecture"],["India","Optimised"],["AIS-140","Compliant"]].map(([v,l])=>(
               <div key={l} style={{textAlign:"center"}}>
-                <div style={{fontSize:20,fontWeight:800,color:"#0f2220"}}>{v}</div>
+                <div style={{fontSize:18,fontWeight:800,color:"#0f2220"}}>{v}</div>
                 <div style={{fontSize:10,fontWeight:600,color:"#94a3b8",letterSpacing:"0.12em",textTransform:"uppercase",marginTop:4}}>{l}</div>
               </div>
             ))}
