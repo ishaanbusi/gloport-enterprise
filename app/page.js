@@ -604,7 +604,7 @@ export default function TelematicsLanding() {
           name: "MR. ABHIJEET THAKUR",
           role: "FOUNDER & CEO",
           img: "https://i.postimg.cc/fRVGPkr7/PHOTO-2019-07-24-10-01-41-jpg.jpg",
-          desc: "28+ years of excellence across IT, Cloud, AI, and Electronic subsystems.",
+          desc: "28+ years of excellence across IT, Cloud, Artificial Intelligence, and Electronic subsystems.",
         },
         {
           name: "MR. SANJAY SINGH",
