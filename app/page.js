@@ -144,9 +144,9 @@ export default function TelematicsLanding() {
       }}>
         <div style={{...S.inner, display:"flex", alignItems:"center", justifyContent:"space-between"}}>
           <div style={{display:"flex", alignItems:"center", gap:8}}>
-            <div style={{width:8,height:8,borderRadius:"50%",background:BRAND,animation:"pulseDot 2s ease infinite"}}/>
-            <span style={{fontWeight:800,fontSize:13,letterSpacing:"0.12em",color:"#0f2220"}}>
-              GLOPORT <span style={{color:BRAND}}>×</span> CARTELSOL
+            
+            <span style={{fontWeight:800,fontSize:23,letterSpacing:"0.12em",color:"#00fff7"}}>
+              GLOPORT <span style={{color:BRAND}}></span>ENTERPRISE
             </span>
           </div>
           {/* Desktop links */}
@@ -190,13 +190,13 @@ export default function TelematicsLanding() {
         <div style={{position:"relative",zIndex:10,maxWidth:1200,margin:"0 auto",padding:"130px 24px 110px",width:"100%",
           opacity:isLoaded?1:0,transform:isLoaded?"translateY(0)":"translateY(20px)",transition:"all .9s ease"}}>
           {/* Badge */}
-          <div className="fu0" style={{display:"inline-flex",alignItems:"center",gap:10,background:"rgba(59,214,198,.1)",
+          {/* <div className="fu0" style={{display:"inline-flex",alignItems:"center",gap:10,background:"rgba(59,214,198,.1)",
             border:"1px solid rgba(59,214,198,.3)",borderRadius:999,padding:"6px 16px",marginBottom:28}}>
             <div style={{width:6,height:6,borderRadius:"50%",background:BRAND}}/>
             <span style={{fontSize:11,fontWeight:700,letterSpacing:"0.2em",color:BRAND,textTransform:"uppercase"}}>
               Gloport × CarTelSol Germany
             </span>
-          </div>
+          </div> */}
 
           <h1 className="fu1" style={{fontSize:"clamp(2.6rem,6.5vw,5.5rem)",fontWeight:800,color:"white",
             lineHeight:1.05,letterSpacing:"-0.02em",maxWidth:760,marginBottom:22}}>
@@ -206,7 +206,7 @@ export default function TelematicsLanding() {
 
           <p className="fu2" style={{fontSize:"clamp(1rem,2vw,1.15rem)",color:"rgba(255,255,255,.5)",fontWeight:400,
             lineHeight:1.8,maxWidth:540,marginBottom:38,paddingLeft:16,borderLeft:"2px solid rgba(59,214,198,.35)"}}>
-            Gloport, in collaboration with CarTelSol Germany, is developing an advanced automotive telematics unit for the Indian market — for cars, fleets, EVs, buses, trucks, and heavy-duty mobility.
+            Gloport, in collaboration with CarTelSol Germany, is developing an advanced automotive telematics unit for the Indian market for cars, fleets, EVs, buses, trucks, and heavy-duty mobility.
           </p>
 
           <div className="fu3 mob-col" style={{display:"flex",gap:14,flexWrap:"wrap",marginBottom:56}}>
@@ -381,7 +381,7 @@ export default function TelematicsLanding() {
 
             <div>
               <div style={S.chip}><span style={S.chipBar}/>04 // Deployment</div>
-              <h2 style={{...S.h2,marginBottom:32}}>Designed for India's Complete Ecosystem.</h2>
+              <h2 style={{...S.h2,marginBottom:32}}>Designed for India&apos;s Complete Ecosystem.</h2>
               <div style={{display:"flex",flexDirection:"column",gap:10}}>
                 {segments.map((seg,idx)=>(
                   <button key={idx} onClick={()=>setActiveSegment(idx)} style={{
@@ -449,6 +449,126 @@ export default function TelematicsLanding() {
           </div>
         </div>
       </section>
+
+      {/* Team Section - Interactive Reveal Cards */}
+      <section id="team" style={{padding:"96px 0",background:"white"}}>
+  <div style={S.inner}>
+    <div style={{textAlign:"center",maxWidth:640,margin:"0 auto 56px"}}>
+      <div style={{...S.chip,justifyContent:"center"}}>
+        <span style={S.chipBar}/>Leadership
+      </div>
+      <h2 style={{...S.h2,marginBottom:14}}>Meet the Experts</h2>
+    </div>
+
+    <div className="team-grid" style={{gap:24}}>
+      {[
+        {
+          name: "MR. ABHIJEET THAKUR",
+          role: "FOUNDER & CEO",
+          img: "https://i.postimg.cc/fRVGPkr7/PHOTO-2019-07-24-10-01-41-jpg.jpg",
+          desc: "28+ years of excellence across IT, Cloud, AI, and Electronic subsystems.",
+        },
+        {
+          name: "MR. SANJAY SINGH",
+          role: "FOUNDER & CBO",
+          img: "https://i.postimg.cc/LXVm1G7b/Whats-App-Image-2025-03-04-at-23-07-35.jpg",
+          desc: "Seasoned leader with 27+ years in strategic marketing and operational growth.",
+        },
+        {
+          name: "MRS. BUSHRA KHAN",
+          role: "FOUNDER & CFO",
+          img: "https://i.postimg.cc/52gp47X2/Whats-App-Image-2025-01-01-at-15-02-37-1.jpg",
+          desc: "Powerhouse in financial strategy, investment control, and operational excellence.",
+        },
+        {
+          name: "DR. KHALID KHAN",
+          role: "FOUNDER & CHAIRMAN",
+          img: "https://i.postimg.cc/W1TXPLby/Whats-App-Image-2025-01-01-at-15-02-37.jpg",
+          desc: "Reputed entrepreneur & philanthropist with over four decades of experience.",
+        },
+      ].map((member, idx) => (
+        <div
+          key={idx}
+          className="hov-card"
+          style={{
+            ...S.card,
+            border:"1.5px solid #e2e8f0",
+            height:380,
+            position:"relative",
+            overflow:"hidden",
+            display:"flex",
+            flexDirection:"column"
+          }}
+        >
+          <div style={{position:"absolute",inset:0,zIndex:0}}>
+            <img
+              src={member.img}
+              alt={member.name}
+              style={{
+                width:"100%",
+                height:"100%",
+                objectFit:"cover",
+                objectPosition:"top"
+              }}
+            />
+            <div
+              style={{
+                position:"absolute",
+                inset:0,
+                background:"linear-gradient(to bottom,transparent 40%,rgba(15,34,32,.85) 100%)"
+              }}
+            />
+          </div>
+
+          <div style={{position:"relative",zIndex:1,marginTop:"auto",padding:"20px"}}>
+            <h3 style={{fontSize:14,fontWeight:700,color:"white",marginBottom:4}}>
+              {member.name}
+            </h3>
+            <p style={{
+              fontSize:11,
+              fontWeight:600,
+              color:BRAND,
+              marginBottom:8,
+              letterSpacing:"0.06em",
+              textTransform:"uppercase"
+            }}>
+              {member.role}
+            </p>
+            <p style={{
+              fontSize:12,
+              color:"rgba(255,255,255,.7)",
+              lineHeight:1.6,
+              margin:0
+            }}>
+              {member.desc}
+            </p>
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+
+  {/* Responsive Grid */}
+  <style>{`
+    .team-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 24px;
+    }
+
+    @media (max-width: 1024px) {
+      .team-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 640px) {
+      .team-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  `}</style>
+</section>
 
       {/* ═══ WHY CHOOSE US (dark, interactive like reference) ═══════════════ */}
       <section style={{padding:"96px 0",background:DARK}}>
@@ -557,7 +677,7 @@ export default function TelematicsLanding() {
                 <p style={{fontSize:14,fontWeight:600,color:"#0f2220",margin:0,lineHeight:1.7}}>From German automotive intelligence to Indian manufacturing scale — made for India and ready for the world.</p>
               </div>
               <div style={{borderRadius:18,overflow:"hidden",height:160,border:"1.5px solid #e2e8f0"}}>
-                <img src="https://images.unsplash.com/photo-1588421357574-87938a86fa28?auto=format&fit=crop&q=80&w=900"
+                <img src="https://images.unsplash.com/photo-1486262715619-67b85e0b08d3?auto=format&fit=crop&q=80&w=900"
                   alt="Manufacturing" style={{width:"100%",height:"100%",objectFit:"cover",filter:"saturate(.5) brightness(.85)"}}/>
               </div>
             </div>
@@ -597,7 +717,7 @@ export default function TelematicsLanding() {
               <div style={S.iconBox}><MapPin size={22}/></div>
               <div>
                 <h4 style={{fontSize:16,fontWeight:700,color:"#0f2220",marginBottom:6}}>Our Office</h4>
-                <p style={{fontSize:13,color:"#94a3b8",lineHeight:1.7,margin:0}}><strong style={{color:"#475569"}}>Gloport Technologies</strong><br/>Navi Mumbai, Maharashtra, India</p>
+                <p style={{fontSize:13,color:"#94a3b8",lineHeight:1.7,margin:0}}><strong style={{color:"#475569"}}>Gloport Enterprise</strong><br/>21st Floor, 2103 - 2106, Kamdhenu 23 West, TTC Industrial Area, Pawne, Navi Mumbai, 400710</p>
               </div>
             </div>
 
@@ -607,7 +727,7 @@ export default function TelematicsLanding() {
               <div style={S.iconBox}><Mail size={22}/></div>
               <div style={{flex:1}}>
                 <h4 style={{fontSize:16,fontWeight:700,color:"#0f2220",marginBottom:6}}>Email Us</h4>
-                <p style={{fontSize:13,color:"#94a3b8",margin:0}}>[ Email Placeholder ]</p>
+                <p style={{fontSize:13,color:"#94a3b8",margin:0}}>info@gloportech.com</p>
               </div>
               <div style={{position:"absolute",right:22,top:24,color:copiedStatus==="email"?"#22c55e":"#cbd5e1"}}>
                 {copiedStatus==="email"?<CheckCircle size={18}/>:<Copy size={18}/>}
@@ -620,7 +740,7 @@ export default function TelematicsLanding() {
               <div style={S.iconBox}><Phone size={22}/></div>
               <div style={{flex:1}}>
                 <h4 style={{fontSize:16,fontWeight:700,color:"#0f2220",marginBottom:6}}>Call Us</h4>
-                <p style={{fontSize:13,color:"#94a3b8",margin:0}}>[ Phone Placeholder ]</p>
+                <p style={{fontSize:13,color:"#94a3b8",margin:0}}>+91 9833396290</p>
               </div>
               <div style={{position:"absolute",right:22,top:24,color:copiedStatus==="phone"?"#22c55e":"#cbd5e1"}}>
                 {copiedStatus==="phone"?<CheckCircle size={18}/>:<Copy size={18}/>}
@@ -647,8 +767,8 @@ export default function TelematicsLanding() {
       <footer style={{background:DARK,padding:"36px 0",borderTop:"1px solid rgba(59,214,198,.08)"}}>
         <div style={{...S.inner,display:"flex",flexWrap:"wrap",gap:16,justifyContent:"space-between",alignItems:"center"}}>
           <div>
-            <div style={{fontWeight:800,fontSize:13,letterSpacing:"0.1em",color:"white",marginBottom:4}}>
-              <span style={{color:BRAND}}>GLOPORT</span> × CARTELSOL GERMANY
+            <div style={{fontWeight:800,fontSize:23,letterSpacing:"0.1em",color:"white",marginBottom:4}}>
+              Gloport Enterprise
             </div>
             <div style={{fontSize:12,color:"rgba(255,255,255,.25)"}}>Futuristic Telematics for India's Connected Mobility Era</div>
           </div>
