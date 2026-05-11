@@ -33,11 +33,10 @@ export default function TelematicsLanding() {
   const [activeSegment,  setActiveSegment]  = useState(0);
   const [activeTab,      setActiveTab]      = useState(0);
   const [copiedStatus,   setCopiedStatus]   = useState("");
-  const [isLoaded,       setIsLoaded]       = useState(false);
+  const [isLoaded,       setIsLoaded]       = useState(true);
   const [menuOpen,       setMenuOpen]       = useState(false);
 
   useEffect(() => {
-    setIsLoaded(true);
     const onScroll = () => setScrollY(window.scrollY);
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
